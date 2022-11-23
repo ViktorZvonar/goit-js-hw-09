@@ -1,5 +1,6 @@
 import 'flatpickr/dist/flatpickr.js';
 import 'flatpickr/dist/flatpickr.min.css';
+import Notiflix from 'notiflix';
 
 const btnEl = document.querySelector('button[data-start]');
 const daysEl = document.querySelector('.value[data-days');
@@ -15,12 +16,16 @@ const options = {
   onClose(selectedDates) {
     console.log(selectedDates[0]);
     if (selectedDates[0] < new Date()) {
-      alert('Please choose a date in the future');
+      btnEl.disabled = true;
+      Notiflix.Notify.failure('Please choose a date in the future');
     } else {
+      Notiflix.Notify.success('You are good with the date :)');
       btnEl.disabled = false;
     }
   },
 };
+
+let timerId = null;
 
 flatpickr(inputEl, options);
 
@@ -29,7 +34,7 @@ btnEl.addEventListener('click', TimeChanger);
 
 function TimeChanger() {
   btnEl.disabled = true;
-  const timerId = setInterval(() => {
+  timerId = setInterval(() => {
     const deltaTime = new Date(inputEl.value) - new Date();
     const time = convertMs(deltaTime);
     updateClockface(time);
