@@ -33,7 +33,7 @@ btnEl.addEventListener('click', timeChanger);
 function timeChanger() {
   btnEl.disabled = true;
   const timerId = setInterval(() => {
-    const deltaTime = selectedDates[0] - new Date();
+    const deltaTime = new Date(inputEl.value) - new Date();
     const time = convertMs(deltaTime);
     updateClockface(time);
     if (deltaTime === 0) {
