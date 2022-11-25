@@ -25,17 +25,15 @@ const options = {
   },
 };
 
-let timerId = null;
-
 flatpickr(inputEl, options);
 
 btnEl.disabled = true;
-btnEl.addEventListener('click', TimeChanger);
+btnEl.addEventListener('click', timeChanger);
 
-function TimeChanger() {
+function timeChanger() {
   btnEl.disabled = true;
-  timerId = setInterval(() => {
-    const deltaTime = new Date(inputEl.value) - new Date();
+  const timerId = setInterval(() => {
+    const deltaTime = selectedDates[0] - new Date();
     const time = convertMs(deltaTime);
     updateClockface(time);
     if (deltaTime === 0) {
