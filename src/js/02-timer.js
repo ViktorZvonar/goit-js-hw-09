@@ -34,6 +34,7 @@ btnEl.disabled = true;
 btnEl.addEventListener('click', timeChanger);
 
 function timeChanger() {
+  inputEl.disabled = true;
   btnEl.disabled = true;
   const timerId = setInterval(() => {
     const deltaTime = new Date(inputEl.value) - new Date();
