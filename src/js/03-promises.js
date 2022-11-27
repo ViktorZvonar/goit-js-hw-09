@@ -12,7 +12,8 @@ function onFormSubmit(event) {
 
   for (let i = 0; i < Number(amountEl.value); i += 1) {
     const delay = Number(delayEl.value) + Number(stepEl.value) * i;
-    const position = i;
+    console.log();
+    const position = i + 1;
     createPromise(position, delay)
       .then(({ position, delay }) => {
         Notiflix.Notify.success(`Fulfilled promise ${position} in ${delay}ms`);

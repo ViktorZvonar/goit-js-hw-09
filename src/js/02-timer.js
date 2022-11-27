@@ -1,6 +1,8 @@
-import 'flatpickr/dist/flatpickr.js';
+import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 import Notiflix from 'notiflix';
+
+let userDate = 0;
 
 const btnEl = document.querySelector('button[data-start]');
 const daysEl = document.querySelector('.value[data-days');
@@ -14,6 +16,7 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
+    userDate = selectedDates[0];
     console.log(selectedDates[0]);
     if (selectedDates[0] < new Date()) {
       btnEl.disabled = true;
@@ -36,7 +39,7 @@ function timeChanger() {
     const deltaTime = new Date(inputEl.value) - new Date();
     const time = convertMs(deltaTime);
     updateClockface(time);
-    if (deltaTime === 0) {
+    if (deltaTime < 0) {
       clearInterval(timerId);
     }
   }, 1000);
